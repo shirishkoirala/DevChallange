@@ -1,4 +1,7 @@
 package com.shirishkoirala.devchallange
 
-class SearchScreen {
+import androidx.appcompat.app.AppCompatActivity
+
+class SearchScreen: AppCompatActivity() {
+
 }
