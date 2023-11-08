@@ -14,18 +14,26 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/search_bar_background"
             android:fontFamily="@font/inter_regular"
             android:hint="Search"
-            android:paddingStart="16dp"
+            android:paddingStart="32dp"
             android:textColor="#D01313"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="Popular Right now"
             android:textSize="60sp"
             app:fontFamily="@font/jomhuria_regular" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </androidx.appcompat.widget.LinearLayoutCompat>
