@@ -1,5 +1,6 @@
 package com.shirishkoirala.devchallenge.services
 
+import android.util.Log
 import com.shirishkoirala.devchallenge.network.apis.ApiService
 import com.shirishkoirala.devchallenge.network.models.PopularMoviesDTO
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +15,7 @@ class PopularMoviesService @Inject constructor(
         return flow {
             emit(Result.success(api.getTrendingMoviesOfTheDay()))
         }.catch {
+            Log.e("PopularMoviesService", "fetchPopularMoviesService: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }
