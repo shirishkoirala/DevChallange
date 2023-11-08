@@ -13,7 +13,7 @@
         android:theme="@style/Theme.DevChallange"
         tools:targetApi="31">
         <activity
-            android:name=".SearchScreen"
+            android:name=".SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,13 +2,13 @@ package com.shirishkoirala.devchallange
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.shirishkoirala.devchallange.databinding.SearchScreenBinding
+import com.shirishkoirala.devchallange.databinding.ActivitySearchBinding
 
-class SearchScreen : AppCompatActivity() {
-    private lateinit var binding: SearchScreenBinding;
+class SearchActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySearchBinding;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SearchScreenBinding.inflate(layoutInflater);
+        binding = ActivitySearchBinding.inflate(layoutInflater);
         setContentView(binding.root)
     }
 }
