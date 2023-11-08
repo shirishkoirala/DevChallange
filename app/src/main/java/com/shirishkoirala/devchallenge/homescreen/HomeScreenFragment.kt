@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shirishkoirala.devchallenge.adapters.MovieListAdapter
+import com.shirishkoirala.devchallenge.coordinators.Navigator
 import com.shirishkoirala.devchallenge.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,12 +20,16 @@ class HomeScreenFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: HomeScreenViewModelFactory
+
+    var navigator: Navigator = Navigator()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
+        navigator.activity = requireActivity()
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenViewModel::class.java]
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
@@ -40,7 +45,11 @@ class HomeScreenFragment : Fragment() {
             if (movies.isSuccess) {
                 binding.recyclerView.layoutManager = LinearLayoutManager(context)
                 binding.recyclerView.adapter =
-                    MovieListAdapter(movies = movies.getOrNull()!!, listener = {})
+                    MovieListAdapter(movies = movies.getOrNull()!!, listener = {
+                        it?.let {
+                            navigator.showDetailPage(it)
+                        }
+                    })
             }
         }
         return binding.root;
