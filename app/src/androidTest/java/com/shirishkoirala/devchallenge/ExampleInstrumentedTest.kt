@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallange
+package com.shirishkoirala.devchallenge
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

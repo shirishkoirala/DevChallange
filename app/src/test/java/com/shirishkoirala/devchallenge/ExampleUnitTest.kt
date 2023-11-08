@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallange
+package com.shirishkoirala.devchallenge
 
 import org.junit.Test
 
