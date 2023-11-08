@@ -1,15 +1,17 @@
 package com.shirishkoirala.devchallenge.homescreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.shirishkoirala.devchallenge.adapters.MovieListAdapter
 import com.shirishkoirala.devchallenge.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class HomeScreenFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -27,17 +29,19 @@ class HomeScreenFragment : Fragment() {
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
                 true -> {
-//                    loader.visibility = View.VISIBLE
                 }
 
                 false -> {
-//                    loader.visibility = View.GONE
                 }
             }
         }
 
         viewModel.popularList.observe(viewLifecycleOwner) { movies ->
-            Log.d("Movies", "onCreateView: ${movies.isSuccess}")
+            if (movies.isSuccess) {
+                binding.recyclerView.layoutManager = LinearLayoutManager(context)
+                binding.recyclerView.adapter =
+                    MovieListAdapter(movies = movies.getOrNull()!!, listener = {})
+            }
         }
         return binding.root;
     }
