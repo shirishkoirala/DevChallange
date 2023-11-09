@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallenge.homescreen
+package com.shirishkoirala.devchallenge.ui.homescreen
 
 import android.os.Bundle
 import android.view.LayoutInflater

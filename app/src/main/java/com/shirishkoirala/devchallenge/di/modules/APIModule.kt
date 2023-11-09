@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallenge
+package com.shirishkoirala.devchallenge.di.modules
 
 import android.content.Context
 import com.shirishkoirala.devchallenge.network.apis.ApiService
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+class APIModule {
 
     @Singleton
     @Provides

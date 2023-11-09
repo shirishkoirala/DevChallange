@@ -11,6 +11,7 @@
         android:layout_height="250dp">
 
         <ImageView
+            android:id="@+id/backdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentStart="true"
@@ -28,7 +29,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:background="#01000000" />
+            android:background="#77000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -172,6 +173,7 @@
             app:fontFamily="@font/inter_bold" />
 
         <TextView
+            android:id="@+id/overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="A magical meteor crash-lands in Adventure City, gives the PAW Patrol pups superpowers, and transforms them into The Mighty Pups. When the Patrol's archrival Humdinger breaks out of jail and teams up with mad scientist Victoria Vance to steal the powers for themselves, the Mighty Pups must save Adventure City and stop the supervillains before it's too late."
