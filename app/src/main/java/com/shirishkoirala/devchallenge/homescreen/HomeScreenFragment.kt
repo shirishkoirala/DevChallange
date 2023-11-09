@@ -21,7 +21,7 @@ class HomeScreenFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: HomeScreenViewModelFactory
 
-    var navigator: Navigator = Navigator()
+    lateinit var navigator: Navigator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        navigator.activity = requireActivity()
+        navigator = Navigator(requireActivity())
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenViewModel::class.java]
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
