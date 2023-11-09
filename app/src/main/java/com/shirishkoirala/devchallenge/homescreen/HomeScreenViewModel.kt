@@ -11,5 +11,6 @@ class HomeScreenViewModel(private val repository: PopularListRepository) : ViewM
     val popularList = liveData {
         loader.postValue(true)
         emitSource(repository.getPopularMovieList().asLiveData())
+        loader.postValue(false)
     }
 }

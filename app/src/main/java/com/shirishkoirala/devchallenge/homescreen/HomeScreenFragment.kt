@@ -34,9 +34,11 @@ class HomeScreenFragment : Fragment() {
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
                 true -> {
+                    binding.loading.visibility = View.VISIBLE
                 }
 
                 false -> {
+                    binding.loading.visibility = View.GONE
                 }
             }
         }
