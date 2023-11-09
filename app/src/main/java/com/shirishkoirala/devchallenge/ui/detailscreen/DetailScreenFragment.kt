@@ -41,11 +41,16 @@ class DetailScreenFragment : Fragment() {
             navigator.showPopularMovies()
         }
 
-        viewModel.movieDetail.observe(viewLifecycleOwner) {
-            binding.title.text = it.title
-            Glide.with(this).load(it.posterPath).into(binding.posterImage)
-            binding.overview.text = it.overview
-            Glide.with(this).load(it.backdropPath).into(binding.backdrop)
+        viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
+            binding.title.text = movie.title
+            Glide.with(this).load(movie.posterPath).into(binding.posterImage)
+            binding.overview.text = movie.overview
+            Glide.with(this).load(movie.backdropPath).into(binding.backdrop)
+            binding.heroTitle.text = movie.title
+            binding.userScore.text = "${movie.userScore} % User Score"
+            movie.userScore?.toInt()?.let {
+                binding.rating.progress = it
+            }
         }
         return binding.root
     }
