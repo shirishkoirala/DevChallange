@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -49,6 +50,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="My favourites"
@@ -57,43 +59,57 @@
                 android:textSize="94dp"
                 app:fontFamily="@font/jomhuria_regular" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="32dp"
-                android:src="@drawable/sad_face" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="You have no favourites"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="21sp"
-                app:fontFamily="@font/inter_extra_bold" />
-
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/empty_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp"
-                android:background="@drawable/round_rectangle_border"
-                android:orientation="vertical"
-                android:padding="32dp">
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="32dp"
+                    android:src="@drawable/sad_face" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tap the star to favourite a movie"
-                    android:textAlignment="center" />
+                    android:text="You have no favourites"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="21sp"
+                    app:fontFamily="@font/inter_extra_bold" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:background="#00000000"
-                    android:src="@drawable/star_outline" />
+                    android:layout_margin="32dp"
+                    android:background="@drawable/round_rectangle_border"
+                    android:orientation="vertical"
+                    android:padding="32dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tap the star to favourite a movie"
+                        android:textAlignment="center" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:background="#00000000"
+                        android:src="@drawable/star_outline" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:listitem="@layout/horizontal_list_item" />
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="250dp"
