@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.shirishkoirala.devchallenge.R
 import com.shirishkoirala.devchallenge.ui.detailscreen.DetailScreenFragment
+import com.shirishkoirala.devchallenge.ui.favouritesscreen.FavouritesScreenFragment
 import com.shirishkoirala.devchallenge.ui.homescreen.HomeScreenFragment
 
 
@@ -29,5 +30,10 @@ class Navigator(var activity: FragmentActivity?) {
 
     fun destroy() {
         activity = null
+    }
+
+    fun showFavourites() {
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.fragment_container, FavouritesScreenFragment())?.commit()
     }
 }

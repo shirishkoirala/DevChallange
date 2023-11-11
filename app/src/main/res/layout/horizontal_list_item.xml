@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp">
+        android:paddingBottom="10dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/posterImage"
@@ -32,7 +32,7 @@
             android:background="@drawable/circular_button_background"
             android:elevation="5dp"
             android:padding="15dp"
-            android:src="@drawable/star_outline"
+            android:src="@drawable/star_fill"
             app:layout_constraintBottom_toBottomOf="@id/posterImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

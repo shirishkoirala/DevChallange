@@ -52,6 +52,10 @@ class DetailScreenFragment : Fragment() {
                 binding.rating.progress = it
             }
         }
+
+        binding.viewFavButton.setOnClickListener {
+            navigator.showFavourites()
+        }
         return binding.root
     }
 }
