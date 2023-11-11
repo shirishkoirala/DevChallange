@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shirishkoirala.devchallenge.R
 import com.shirishkoirala.devchallenge.adapters.FavouritesMovieListAdapter
+import com.shirishkoirala.devchallenge.coordinators.Navigator
 import com.shirishkoirala.devchallenge.databinding.FragmentFavouritesScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,6 +22,7 @@ class FavouritesScreenFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: FavouritesScreenViewModelFactory
+    lateinit var navigator: Navigator
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +30,19 @@ class FavouritesScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFavouritesScreenBinding.inflate(inflater)
+        navigator = Navigator(requireActivity())
         viewModel = ViewModelProvider(this, viewModelFactory)[FavouritesScreenViewModel::class.java]
         viewModel.getFavouriteMovies(20678273)
         viewModel.favouriteMoviesList.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
-                binding.topBar.background = ContextCompat.getDrawable(requireContext(), R.color.mint_green)
-                binding.title.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark_teal))
+                binding.topBar.background =
+                    ContextCompat.getDrawable(requireContext(), R.color.mint_green)
+                binding.title.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.dark_teal
+                    )
+                )
 
                 binding.emptyList.visibility = View.GONE
                 binding.recyclerView.adapter = FavouritesMovieListAdapter(it) {
@@ -44,6 +53,9 @@ class FavouritesScreenFragment : Fragment() {
             } else {
                 binding.emptyList.visibility = View.VISIBLE
             }
+        }
+        binding.backButton.setOnClickListener {
+            navigator.showPopularMovies()
         }
         return binding.root
     }
