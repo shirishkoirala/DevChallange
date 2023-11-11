@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallenge.network.apis
+package com.shirishkoirala.devchallenge.data.network.apis
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

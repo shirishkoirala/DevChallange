@@ -1,8 +1,8 @@
 package com.shirishkoirala.devchallenge.di.modules
 
 import android.content.Context
-import com.shirishkoirala.devchallenge.network.apis.ApiService
-import com.shirishkoirala.devchallenge.network.apis.AuthInterceptor
+import com.shirishkoirala.devchallenge.data.network.apis.ApiService
+import com.shirishkoirala.devchallenge.data.network.apis.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

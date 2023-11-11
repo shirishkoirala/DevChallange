@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallenge.network.apis
+package com.shirishkoirala.devchallenge.data.network.apis
 
 import android.content.Context
 import okhttp3.Interceptor

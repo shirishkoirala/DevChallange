@@ -2,7 +2,7 @@ package com.shirishkoirala.devchallenge.ui.detailscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.shirishkoirala.devchallenge.repositories.MovieRepository
+import com.shirishkoirala.devchallenge.data.repositories.MovieRepository
 import javax.inject.Inject
 
 class DetailScreenViewModelFactory @Inject constructor(private val repository: MovieRepository) :

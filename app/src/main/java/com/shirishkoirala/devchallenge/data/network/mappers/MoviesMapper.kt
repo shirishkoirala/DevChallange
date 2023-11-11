@@ -1,7 +1,7 @@
-package com.shirishkoirala.devchallenge.mappers
+package com.shirishkoirala.devchallenge.data.network.mappers
 
 import com.shirishkoirala.devchallenge.models.Movie
-import com.shirishkoirala.devchallenge.network.models.MovieDetailDTO
+import com.shirishkoirala.devchallenge.data.network.models.MovieDetailDTO
 import kotlin.math.roundToInt
 
 class MoviesMapper : Function1<MovieDetailDTO, Movie> {

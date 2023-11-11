@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shirishkoirala.devchallenge.models.Movie
-import com.shirishkoirala.devchallenge.repositories.MovieRepository
+import com.shirishkoirala.devchallenge.data.repositories.MovieRepository
 import kotlinx.coroutines.launch
 
 class DetailScreenViewModel(private val repository: MovieRepository) : ViewModel() {

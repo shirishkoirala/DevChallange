@@ -1,4 +1,4 @@
-package com.shirishkoirala.devchallenge.network.models
+package com.shirishkoirala.devchallenge.data.network.models
 
 import com.google.gson.annotations.SerializedName
 
