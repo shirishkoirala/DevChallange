@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/mint_green"
+        android:gravity="bottom|center"
+        android:includeFontPadding="false"
+        android:text="Set your personal star rating"
+        android:textColor="@color/dark_teal"
+        android:textSize="38sp"
+        app:fontFamily="@font/jomhuria_regular" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="32dp"
+        android:background="@drawable/round_rectangle_border"
+        android:hint="0"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textAlignment="center" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:background="@drawable/circular_button_background"
+        android:text="Save"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/dark_teal"
+        app:fontFamily="@font/inter_extra_bold" />
+</androidx.appcompat.widget.LinearLayoutCompat>
