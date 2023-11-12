@@ -62,5 +62,20 @@ class MovieRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun search(query: String): Flow<Result<List<Movie>>> =
+        service.searchMovies(query).map {
+            if (it.isSuccess) {
+                Result.success(
+                    PopularMoviesMapper.mapPopularMoviesDtoToMovie(
+                        it.getOrNull()!!,
+                        movieDatabase.getGenreDao()
+                    )
+                )
+            } else {
+                Result.failure(it.exceptionOrNull()!!)
+            }
+
+        }
 }
 

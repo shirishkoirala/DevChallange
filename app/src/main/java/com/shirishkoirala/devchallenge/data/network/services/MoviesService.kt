@@ -43,6 +43,7 @@ class MoviesService @Inject constructor(
         return flow<Result<PopularMoviesDTO>> {
             emit(Result.success(api.search(query)))
         }.catch {
+            Log.e("MoviesService", "searchMovies: ${it.message}", )
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }

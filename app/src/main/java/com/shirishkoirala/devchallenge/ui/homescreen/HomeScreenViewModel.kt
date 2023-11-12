@@ -18,11 +18,21 @@ class HomeScreenViewModel(private val repository: MovieRepository) : ViewModel()
                 loader.postValue(false)
                 if (it.isSuccess) {
                     popularList.postValue(it.getOrNull())
-                } else {
-
                 }
             }
         }
 
+    }
+
+    fun search(toString: String) {
+        loader.postValue(true)
+        viewModelScope.launch {
+            repository.search(toString).collect {
+                loader.postValue(false)
+                if (it.isSuccess) {
+                    popularList.postValue(it.getOrNull())
+                }
+            }
+        }
     }
 }

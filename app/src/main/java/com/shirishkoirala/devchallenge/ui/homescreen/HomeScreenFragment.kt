@@ -1,9 +1,11 @@
 package com.shirishkoirala.devchallenge.ui.homescreen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +49,14 @@ class HomeScreenFragment : Fragment() {
                         navigator.showDetailPage(it)
                     }
                 })
+        }
+
+        binding.searchBarEditText.addTextChangedListener {
+            it?.let {
+                viewModel.search(it.toString())
+            }
+
+            Log.d("HomeScreenFragment", "onCreateView: ${it?.toString()}")
         }
         return binding.root;
     }

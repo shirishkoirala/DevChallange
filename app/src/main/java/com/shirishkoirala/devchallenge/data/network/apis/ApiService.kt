@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("trending/movie/day")
@@ -22,7 +23,7 @@ interface ApiService {
     suspend fun getFavouritesMovies(@Path("account_id") accountId: Int): FavouriteMoviesDTO
 
     @GET("search/movie")
-    suspend fun search(query: String): PopularMoviesDTO
+    suspend fun search(@Query("query", encoded = true) query: String): PopularMoviesDTO
 
     @GET("genre/movie/list")
     suspend fun getAllGenre(): GetGenreListDto
