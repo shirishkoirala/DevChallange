@@ -6,6 +6,8 @@ import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
 import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.PostRatingMovieDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.PostResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -43,7 +45,7 @@ class MoviesService @Inject constructor(
         return flow<Result<PopularMoviesDTO>> {
             emit(Result.success(api.search(query)))
         }.catch {
-            Log.e("MoviesService", "searchMovies: ${it.message}", )
+            Log.e("MoviesService", "searchMovies: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }
@@ -52,6 +54,18 @@ class MoviesService @Inject constructor(
         return flow<Result<GetGenreListDto>> {
             emit(Result.success(api.getAllGenre()))
         }.catch {
+            emit(Result.failure(RuntimeException("Something went wrong!")))
+        }
+    }
+
+    suspend fun postRating(movieId: Int, rating: Double): Flow<Result<PostResponse>> {
+        val postRatingMovieDTO = PostRatingMovieDTO(
+            value = rating
+        )
+        return flow {
+            emit(Result.success(api.addRating(movieId, postRatingMovieDTO)))
+        }.catch {
+            Log.e("MoviesService", "postRating: ${it.message}", )
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }

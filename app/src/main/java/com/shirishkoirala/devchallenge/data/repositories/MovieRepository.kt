@@ -77,5 +77,14 @@ class MovieRepository @Inject constructor(
             }
 
         }
+
+    suspend fun postRating(movieId: Int, rating: Double): Flow<Result<Boolean>> =
+        service.postRating(movieId, rating).map {
+            if (it.isSuccess) {
+                Result.success(true)
+            } else {
+                Result.failure(RuntimeException(it.exceptionOrNull()))
+            }
+        }
 }
 

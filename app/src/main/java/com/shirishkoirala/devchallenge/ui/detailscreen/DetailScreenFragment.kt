@@ -21,6 +21,7 @@ class DetailScreenFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: DetailScreenViewModelFactory
+    private var movieId: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +32,9 @@ class DetailScreenFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailScreenViewModel::class.java]
 
-        val movieId = arguments?.getInt("movie_id")
-        if (movieId != null) {
-            viewModel.getMovieDetail(movieId)
+        movieId = arguments?.getInt("movie_id")
+        movieId?.let {
+            viewModel.getMovieDetail(it)
         }
 
         binding = FragmentDetailScreenBinding.inflate(inflater, container, false)
@@ -58,9 +59,14 @@ class DetailScreenFragment : Fragment() {
             navigator.showFavourites()
         }
 
-        binding.rateItMyselfCard.setOnClickListener{
-            val rateDialog = RatingDialogFragment()
-            rateDialog.show(parentFragmentManager, "BottomSheet")
+        binding.rateItMyselfCard.setOnClickListener {
+            movieId?.let {
+                val bundle = Bundle()
+                bundle.putInt("movie_id", it)
+                val rateDialog = RatingDialogFragment()
+                rateDialog.arguments = bundle
+                rateDialog.show(parentFragmentManager, "BottomSheet")
+            }
         }
         return binding.root
     }

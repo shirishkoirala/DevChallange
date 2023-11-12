@@ -6,6 +6,7 @@ import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostFavouriteMovieDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostRatingMovieDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.PostResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -38,6 +39,6 @@ interface ApiService {
     suspend fun addRating(
         @Path("movie_id") movieId: Int,
         @Body postRatingMovieDTO: PostRatingMovieDTO
-    )
+    ): PostResponse
 
 }
