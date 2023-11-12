@@ -1,11 +1,11 @@
 package com.shirishkoirala.devchallenge.data.network.mappers
 
+import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.models.Movie
-import com.shirishkoirala.devchallenge.data.network.models.MovieDetailDTO
 import kotlin.math.roundToInt
 
-class MoviesMapper : Function1<MovieDetailDTO, Movie> {
-    override fun invoke(detailMovieDto: MovieDetailDTO): Movie {
+object MoviesMapper{
+    fun map(detailMovieDto: MovieDetailDTO): Movie {
 
         var releasedYear: String? = null
         var popularity: String? = null

@@ -31,6 +31,7 @@ class HomeScreenFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater)
         navigator = Navigator(requireActivity())
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeScreenViewModel::class.java]
+        viewModel.getPopularMovies()
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
                 true -> {
@@ -44,15 +45,13 @@ class HomeScreenFragment : Fragment() {
         }
 
         viewModel.popularList.observe(viewLifecycleOwner) { movies ->
-            if (movies.isSuccess) {
-                binding.recyclerView.layoutManager = LinearLayoutManager(context)
-                binding.recyclerView.adapter =
-                    MovieListAdapter(movies = movies.getOrNull()!!, listener = {
-                        it?.let {
-                            navigator.showDetailPage(it)
-                        }
-                    })
-            }
+            binding.recyclerView.layoutManager = LinearLayoutManager(context)
+            binding.recyclerView.adapter =
+                MovieListAdapter(movies = movies, listener = {
+                    it?.let {
+                        navigator.showDetailPage(it)
+                    }
+                })
         }
         return binding.root;
     }

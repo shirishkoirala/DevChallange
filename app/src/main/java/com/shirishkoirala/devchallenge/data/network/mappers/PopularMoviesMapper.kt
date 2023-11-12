@@ -1,14 +1,15 @@
 package com.shirishkoirala.devchallenge.data.network.mappers
 
+import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
 import com.shirishkoirala.devchallenge.models.Movie
-import com.shirishkoirala.devchallenge.data.network.models.PopularMoviesDTO
-import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class PopularMoviesMapper @Inject constructor() : Function1<PopularMoviesDTO, List<Movie>> {
+object PopularMoviesMapper {
 
-    override fun invoke(p1: PopularMoviesDTO): List<Movie> {
-        return p1.results.map { movieDTO ->
+    fun mapPopularMoviesDtoToMovie(
+        popularMoviesDTO: PopularMoviesDTO
+    ): List<Movie> {
+        return popularMoviesDTO.results.map { movieDTO ->
             var releasedYear: String? = null
             var popularity: String? = null
 
@@ -19,6 +20,7 @@ class PopularMoviesMapper @Inject constructor() : Function1<PopularMoviesDTO, Li
             movieDTO.voteAverage?.let {
                 popularity = "${((it / 10) * 100).roundToInt()}"
             }
+
             Movie(
                 id = movieDTO.id,
                 title = movieDTO.title,

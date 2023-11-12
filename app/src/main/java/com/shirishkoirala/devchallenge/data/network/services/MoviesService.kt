@@ -1,11 +1,11 @@
-package com.shirishkoirala.devchallenge.services
+package com.shirishkoirala.devchallenge.data.network.services
 
 import android.util.Log
 import com.shirishkoirala.devchallenge.data.network.apis.ApiService
-import com.shirishkoirala.devchallenge.data.network.models.FavouriteMoviesDTO
-import com.shirishkoirala.devchallenge.data.network.models.GetGenreListDto
-import com.shirishkoirala.devchallenge.data.network.models.MovieDetailDTO
-import com.shirishkoirala.devchallenge.data.network.models.PopularMoviesDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
+import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
