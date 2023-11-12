@@ -1,19 +1,23 @@
 package com.shirishkoirala.devchallenge.data.repositories
 
-import com.shirishkoirala.devchallenge.models.Movie
+import com.shirishkoirala.devchallenge.data.local.MovieDatabase
 import com.shirishkoirala.devchallenge.data.network.mappers.FavouriteMoviesMapper
+import com.shirishkoirala.devchallenge.data.network.mappers.GenreMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.MoviesMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.PopularMoviesMapper
-import com.shirishkoirala.devchallenge.services.PopularMoviesService
+import com.shirishkoirala.devchallenge.models.Movie
+import com.shirishkoirala.devchallenge.services.MoviesService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val service: PopularMoviesService,
+    private val service: MoviesService,
+    private val movieDatabase: MovieDatabase
 ) {
     @Inject
-    lateinit var mapper: PopularMoviesMapper
+    lateinit var popularMoviesMapper: PopularMoviesMapper
 
     @Inject
     lateinit var movieDetailMapper: MoviesMapper
@@ -21,11 +25,13 @@ class MovieRepository @Inject constructor(
     @Inject
     lateinit var favouriteMoviesMapper: FavouriteMoviesMapper
 
+    @Inject
+    lateinit var genreMapper: GenreMapper
 
     suspend fun getPopularMovieList(): Flow<Result<List<Movie>>> =
         service.fetchPopularMoviesService().map {
             if (it.isSuccess) {
-                Result.success(mapper(it.getOrNull()!!))
+                Result.success(popularMoviesMapper(it.getOrNull()!!))
             } else {
                 Result.failure(it.exceptionOrNull()!!)
             }
@@ -49,4 +55,18 @@ class MovieRepository @Inject constructor(
             }
         }
 
+    suspend fun fetchAllGenres(): Flow<Result<Boolean>> {
+        return flow {
+            service.getMovieGenre().collect {
+                if (it.isSuccess) {
+                    movieDatabase.getGenreDao()
+                        .insertAll(genreMapper.mapToGenreEntity(it.getOrNull()!!))
+                    emit(Result.success(true))
+                } else {
+                    emit(Result.failure(it.exceptionOrNull()!!))
+                }
+            }
+        }
+    }
 }
+

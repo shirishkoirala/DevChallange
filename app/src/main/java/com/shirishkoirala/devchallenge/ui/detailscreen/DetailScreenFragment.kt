@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.shirishkoirala.devchallenge.coordinators.Navigator
 import com.shirishkoirala.devchallenge.databinding.FragmentDetailScreenBinding
+import com.shirishkoirala.devchallenge.ui.ratingdialog.RatingDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -55,6 +56,11 @@ class DetailScreenFragment : Fragment() {
 
         binding.viewFavButton.setOnClickListener {
             navigator.showFavourites()
+        }
+
+        binding.rateItMyselfCard.setOnClickListener{
+            val rateDialog = RatingDialogFragment()
+            rateDialog.show(parentFragmentManager, "BottomSheet")
         }
         return binding.root
     }

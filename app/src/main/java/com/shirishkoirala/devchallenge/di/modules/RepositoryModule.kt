@@ -1,6 +1,7 @@
 package com.shirishkoirala.devchallenge.di.modules
 
 import com.shirishkoirala.devchallenge.data.network.mappers.FavouriteMoviesMapper
+import com.shirishkoirala.devchallenge.data.network.mappers.GenreMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.MoviesMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.PopularMoviesMapper
 import dagger.Module
@@ -19,4 +20,7 @@ class RepositoryModule {
 
     @Provides
     fun favouriteMoviesMapper() = FavouriteMoviesMapper()
+
+    @Provides
+    fun genreMapper() = GenreMapper()
 }

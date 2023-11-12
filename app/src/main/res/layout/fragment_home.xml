@@ -21,7 +21,8 @@
             android:background="@drawable/search_bar_background"
             android:fontFamily="@font/inter_regular"
             android:hint="Search"
-            android:paddingStart="32dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="32dp"
             android:textSize="16sp" />
 
         <TextView
