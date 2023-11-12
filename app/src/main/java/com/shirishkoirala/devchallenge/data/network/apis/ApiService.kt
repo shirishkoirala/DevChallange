@@ -33,7 +33,7 @@ interface ApiService {
     suspend fun addFavourite(
         @Path("account_id") accountId: Int,
         @Body postFavouriteMovieDTO: PostFavouriteMovieDTO
-    )
+    ): PostResponse
 
     @POST("movie/{movie_id}/rating")
     suspend fun addRating(

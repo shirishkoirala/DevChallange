@@ -6,6 +6,7 @@ import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
 import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
+import com.shirishkoirala.devchallenge.data.network.dtos.PostFavouriteMovieDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostRatingMovieDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostResponse
 import kotlinx.coroutines.flow.Flow
@@ -65,7 +66,20 @@ class MoviesService @Inject constructor(
         return flow {
             emit(Result.success(api.addRating(movieId, postRatingMovieDTO)))
         }.catch {
-            Log.e("MoviesService", "postRating: ${it.message}", )
+            Log.e("MoviesService", "postRating: ${it.message}")
+            emit(Result.failure(RuntimeException("Something went wrong!")))
+        }
+    }
+
+    suspend fun addFavourite(
+        accountId: Int,
+        movieId: Int
+    ): Flow<Result<PostResponse>> {
+        val postRatingMovieDTO = PostFavouriteMovieDTO(mediaId = movieId)
+        return flow {
+            emit(Result.success(api.addFavourite(accountId, postRatingMovieDTO)))
+        }.catch {
+            Log.e("MoviesService", "postRating: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }

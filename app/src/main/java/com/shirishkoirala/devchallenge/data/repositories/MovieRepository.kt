@@ -86,5 +86,14 @@ class MovieRepository @Inject constructor(
                 Result.failure(RuntimeException(it.exceptionOrNull()))
             }
         }
+
+    suspend fun addFavourites(accountId: Int, movieId: Int): Flow<Result<Boolean>> =
+        service.addFavourite(accountId, movieId).map {
+            if (it.isSuccess) {
+                Result.success(true)
+            } else {
+                Result.failure(RuntimeException(it.exceptionOrNull()))
+            }
+        }
 }
 
