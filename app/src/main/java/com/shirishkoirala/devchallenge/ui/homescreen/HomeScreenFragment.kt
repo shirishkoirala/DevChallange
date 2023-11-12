@@ -53,7 +53,11 @@ class HomeScreenFragment : Fragment() {
 
         binding.searchBarEditText.addTextChangedListener {
             it?.let {
-                viewModel.search(it.toString())
+                if(it.toString().isEmpty()){
+                    viewModel.getPopularMovies()
+                }else {
+                    viewModel.search(it.toString())
+                }
             }
 
             Log.d("HomeScreenFragment", "onCreateView: ${it?.toString()}")
