@@ -34,13 +34,8 @@ class HomeScreenFragment : Fragment() {
         viewModel.getPopularMovies()
         viewModel.loader.observe(viewLifecycleOwner) { loading ->
             when (loading) {
-                true -> {
-                    binding.loading.visibility = View.VISIBLE
-                }
-
-                false -> {
-                    binding.loading.visibility = View.GONE
-                }
+                true -> binding.loading.visibility = View.VISIBLE
+                false -> binding.loading.visibility = View.GONE
             }
         }
 

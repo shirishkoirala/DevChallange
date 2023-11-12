@@ -31,6 +31,7 @@ class MovieListAdapter(
         holder.userScore.text = "${item.userScore}% User Score"
         Glide.with(holder.root).load(item.posterPath).centerCrop().into(holder.image)
         holder.root.setOnClickListener { listener(item.id) }
+        holder.genreListRecyclerView.adapter = item.genres?.let { GenreListAdapter(it) }
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +43,7 @@ class MovieListAdapter(
         val year: TextView = binding.year
         val userScore: TextView = binding.percent
         val image: ImageView = binding.image
+        val genreListRecyclerView: RecyclerView = binding.genreList
         val root: View = binding.root
     }
 }

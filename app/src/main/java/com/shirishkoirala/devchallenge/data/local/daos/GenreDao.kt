@@ -28,6 +28,6 @@ interface GenreDao {
     suspend fun update(genre: GenreEntity)
 
     @Query("SELECT * FROM genres WHERE id IN (:genreIds)")
-    fun getGenres(genreIds: ArrayList<Int>): List<GenreEntity>
+    suspend fun getGenres(genreIds: ArrayList<Int>): List<GenreEntity>?
 
 }

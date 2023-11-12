@@ -24,8 +24,8 @@ object GenreMapper {
         }
     }
 
-    fun mapGenreEntityToGenre(genreEntities: List<GenreEntity>): List<Genre> {
-        return genreEntities.map {
+    fun mapGenreEntityToGenre(genreEntities: List<GenreEntity>?): List<Genre>? {
+        return genreEntities?.map {
             Genre(
                 id = it.genreId,
                 name = it.genreName
