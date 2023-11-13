@@ -50,8 +50,7 @@ class FavouritesScreenFragment : Fragment() {
                 )
 
                 binding.emptyList.visibility = View.GONE
-                binding.recyclerView.adapter = FavouritesMovieListAdapter(it) {
-
+                binding.recyclerView.adapter = FavouritesMovieListAdapter(it) { movieId ->
                 }
                 binding.recyclerView.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

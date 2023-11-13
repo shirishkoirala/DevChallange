@@ -13,7 +13,10 @@ class FavouritesMovieListAdapter(
     private val movies: List<Movie>,
     private val listener: (Int?) -> Unit
 ) : RecyclerView.Adapter<FavouritesMovieListAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouritesMovieListAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FavouritesMovieListAdapter.ViewHolder {
         return ViewHolder(
             HorizontalListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -33,8 +36,10 @@ class FavouritesMovieListAdapter(
         return movies.size
     }
 
-    inner class ViewHolder(binding: HorizontalListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: HorizontalListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val image: ImageView = binding.posterImage
+        val favButton = binding.favButton
         val root: View = binding.root
     }
 }

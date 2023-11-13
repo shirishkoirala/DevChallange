@@ -4,6 +4,7 @@ import android.util.Log
 import com.shirishkoirala.devchallenge.data.network.apis.ApiService
 import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
+import com.shirishkoirala.devchallenge.data.network.dtos.GetRatedMoviesResponse
 import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostFavouriteMovieDTO
@@ -67,6 +68,15 @@ class MoviesService @Inject constructor(
             emit(Result.success(api.addRating(movieId, postRatingMovieDTO)))
         }.catch {
             Log.e("MoviesService", "postRating: ${it.message}")
+            emit(Result.failure(RuntimeException("Something went wrong!")))
+        }
+    }
+
+    suspend fun getRatedMovies(accountId: Int): Flow<Result<GetRatedMoviesResponse>> {
+        return flow {
+            emit(Result.success(api.getRating(accountId)))
+        }.catch {
+            Log.e("MoviesService", "getRatedMovies: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }

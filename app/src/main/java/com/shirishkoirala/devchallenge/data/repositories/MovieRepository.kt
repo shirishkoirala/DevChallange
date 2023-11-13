@@ -6,6 +6,7 @@ import com.shirishkoirala.devchallenge.data.network.mappers.FavouriteMoviesMappe
 import com.shirishkoirala.devchallenge.data.network.mappers.GenreMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.MovieMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.PopularMoviesMapper
+import com.shirishkoirala.devchallenge.data.network.mappers.RatedMoviesMapper
 import com.shirishkoirala.devchallenge.data.network.services.MoviesService
 import com.shirishkoirala.devchallenge.models.Movie
 import kotlinx.coroutines.flow.Flow
@@ -91,6 +92,20 @@ class MovieRepository @Inject constructor(
             }
         }
 
+    suspend fun getRatedMovies(accountId: Int): Flow<Result<List<Movie>>> =
+        service.getRatedMovies(accountId).map {
+            if (it.isSuccess) {
+                Result.success(
+                    RatedMoviesMapper.mapRatedMoviesResponseToRatedMovies(
+                        it.getOrNull()!!,
+                        movieDatabase.getGenreDao()
+                    )
+                )
+            } else {
+                Result.failure(RuntimeException(it.exceptionOrNull()))
+            }
+        }
+
     suspend fun addFavourites(accountId: Int, movieId: Int): Flow<Result<Boolean>> =
         service.addFavourite(accountId, movieId, true).map {
             if (it.isSuccess) {
@@ -121,7 +136,7 @@ class MovieRepository @Inject constructor(
     suspend fun setFavourite(movieId: Int, favourite: Boolean) =
         service.addFavourite(20678273, movieId, favourite).map {
             if (it.isSuccess) {
-                if(!favourite){
+                if (!favourite) {
                     movieDatabase.getFavouriteDao().delete(movieId)
                 }
                 Result.success(true)

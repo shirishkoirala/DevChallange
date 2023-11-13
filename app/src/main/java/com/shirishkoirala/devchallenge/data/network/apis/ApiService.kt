@@ -2,6 +2,7 @@ package com.shirishkoirala.devchallenge.data.network.apis
 
 import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
+import com.shirishkoirala.devchallenge.data.network.dtos.GetRatedMoviesResponse
 import com.shirishkoirala.devchallenge.data.network.dtos.MovieDetailDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PopularMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.PostFavouriteMovieDTO
@@ -41,4 +42,6 @@ interface ApiService {
         @Body postRatingMovieDTO: PostRatingMovieDTO
     ): PostResponse
 
+    @GET("account/{account_id}/rated/movies")
+    suspend fun getRating(@Path("account_id") accountId: Int): GetRatedMoviesResponse
 }

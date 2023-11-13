@@ -9,4 +9,5 @@ data class Movie(
     var posterPath: String? = null,
     var backdropPath: String? = null,
     var overview: String? = null,
+    var rating: Int? = null
 )
