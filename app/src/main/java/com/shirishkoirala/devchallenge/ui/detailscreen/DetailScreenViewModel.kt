@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class DetailScreenViewModel(private val repository: MovieRepository) : ViewModel() {
     val loader = MutableLiveData<Boolean>()
     val movieDetail = MutableLiveData<Movie>()
+    val isFavourite = MutableLiveData<Boolean>()
 
     fun getMovieDetail(movieId: Int) {
         loader.postValue(true)
@@ -20,6 +21,19 @@ class DetailScreenViewModel(private val repository: MovieRepository) : ViewModel
                     loader.postValue(false)
                 } else {
                     it.exceptionOrNull()
+                }
+            }
+        }
+    }
+
+    fun checkIfFavourite(movieId: Int) {
+        loader.postValue(true)
+        viewModelScope.launch {
+            repository.checkIfFavourite(movieId).collect {
+                if (it.isSuccess && it.getOrNull()!!) {
+                    isFavourite.postValue(true)
+                } else {
+                    isFavourite.postValue(false)
                 }
             }
         }

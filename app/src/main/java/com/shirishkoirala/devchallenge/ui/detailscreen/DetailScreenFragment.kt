@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.shirishkoirala.devchallenge.R
 import com.shirishkoirala.devchallenge.coordinators.Navigator
 import com.shirishkoirala.devchallenge.databinding.FragmentDetailScreenBinding
 import com.shirishkoirala.devchallenge.ui.ratingdialog.RatingDialogFragment
@@ -35,6 +36,7 @@ class DetailScreenFragment : Fragment() {
         movieId = arguments?.getInt("movie_id")
         movieId?.let {
             viewModel.getMovieDetail(it)
+            viewModel.checkIfFavourite(it)
         }
 
         binding = FragmentDetailScreenBinding.inflate(inflater, container, false)
@@ -66,6 +68,14 @@ class DetailScreenFragment : Fragment() {
                 val rateDialog = RatingDialogFragment()
                 rateDialog.arguments = bundle
                 rateDialog.show(parentFragmentManager, "BottomSheet")
+            }
+        }
+
+        viewModel.isFavourite.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.favPerson.setImageResource(R.drawable.star_fill)
+            } else {
+                binding.favPerson.setImageResource(R.drawable.star_outline)
             }
         }
         return binding.root

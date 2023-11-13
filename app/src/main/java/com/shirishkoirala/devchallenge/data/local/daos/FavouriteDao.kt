@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.shirishkoirala.devchallenge.data.local.entities.FavouriteEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavouriteDao {
@@ -22,6 +23,6 @@ interface FavouriteDao {
     @Update
     suspend fun update(favourite: FavouriteEntity)
 
-    @Query("SELECT * FROM favourites WHERE id = (:movieId)")
-    suspend fun getFavourite(movieId: Int)
+    @Query("SELECT * FROM favourites WHERE movieId = :movieId")
+    fun getFavourite(movieId: Int): Flow<FavouriteEntity?>
 }

@@ -1,5 +1,6 @@
 package com.shirishkoirala.devchallenge.data.repositories
 
+import android.util.Log
 import com.shirishkoirala.devchallenge.data.local.MovieDatabase
 import com.shirishkoirala.devchallenge.data.network.mappers.FavouriteMoviesMapper
 import com.shirishkoirala.devchallenge.data.network.mappers.GenreMapper
@@ -8,6 +9,7 @@ import com.shirishkoirala.devchallenge.data.network.mappers.PopularMoviesMapper
 import com.shirishkoirala.devchallenge.data.network.services.MoviesService
 import com.shirishkoirala.devchallenge.models.Movie
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -97,5 +99,23 @@ class MovieRepository @Inject constructor(
                 Result.failure(RuntimeException(it.exceptionOrNull()))
             }
         }
+
+    suspend fun checkIfFavourite(movieId: Int): Flow<Result<Boolean>> {
+        return flow {
+            movieDatabase.getFavouriteDao().getFavourite(movieId).collect {
+                it?.let {
+                    emit(Result.success(true))
+                    Log.d("MovieRepository", "checkIfFavourite: true")
+                } ?: run {
+                    emit(Result.success(false))
+                    Log.d("MovieRepository", "checkIfFavourite: false")
+                }
+            }
+        }.catch {
+            Log.e("MovieRepository", "checkIfFavourite: ${it.message}")
+            emit(Result.failure(RuntimeException("Something went wrong!")))
+        }
+
+    }
 }
 
