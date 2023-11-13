@@ -64,6 +64,14 @@ class DetailScreenFragment : Fragment() {
             navigator.showFavourites()
         }
 
+        binding.favButton.setOnClickListener {
+            movieId?.let { movieId ->
+                viewModel.isFavourite.value?.let { isFavourite ->
+                    viewModel.setFavourite(movieId, !isFavourite)
+                }
+            }
+        }
+
         binding.rateItMyselfCard.setOnClickListener {
             movieId?.let {
                 val bundle = Bundle()
@@ -76,9 +84,9 @@ class DetailScreenFragment : Fragment() {
 
         viewModel.isFavourite.observe(viewLifecycleOwner) {
             if (it) {
-                binding.favPerson.setImageResource(R.drawable.star_fill)
+                binding.favButton.setImageResource(R.drawable.star_fill)
             } else {
-                binding.favPerson.setImageResource(R.drawable.star_outline)
+                binding.favButton.setImageResource(R.drawable.star_outline)
             }
         }
         return binding.root

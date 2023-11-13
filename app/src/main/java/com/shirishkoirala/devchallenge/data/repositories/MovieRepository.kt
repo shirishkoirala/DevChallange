@@ -92,7 +92,7 @@ class MovieRepository @Inject constructor(
         }
 
     suspend fun addFavourites(accountId: Int, movieId: Int): Flow<Result<Boolean>> =
-        service.addFavourite(accountId, movieId).map {
+        service.addFavourite(accountId, movieId, true).map {
             if (it.isSuccess) {
                 Result.success(true)
             } else {
@@ -117,5 +117,18 @@ class MovieRepository @Inject constructor(
         }
 
     }
+
+    suspend fun setFavourite(movieId: Int, favourite: Boolean) =
+        service.addFavourite(20678273, movieId, favourite).map {
+            if (it.isSuccess) {
+                if(!favourite){
+                    movieDatabase.getFavouriteDao().delete(movieId)
+                }
+                Result.success(true)
+            } else {
+                Result.failure(RuntimeException(it.exceptionOrNull()))
+            }
+        }
+
 }
 

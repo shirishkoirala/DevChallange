@@ -35,6 +35,11 @@ class FavouritesScreenFragment : Fragment() {
         viewModel.getFavouriteMovies(20678273)
         viewModel.favouriteMoviesList.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                binding.button.text = "Search for More"
+                binding.button.setOnClickListener {
+                    navigator.showPopularMovies()
+                }
+
                 binding.topBar.background =
                     ContextCompat.getDrawable(requireContext(), R.color.mint_green)
                 binding.title.setTextColor(
@@ -52,6 +57,10 @@ class FavouritesScreenFragment : Fragment() {
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             } else {
                 binding.emptyList.visibility = View.VISIBLE
+                binding.button.text = "Search for a Favourite"
+                binding.button.setOnClickListener {
+                    navigator.showPopularMovies()
+                }
             }
         }
         binding.backButton.setOnClickListener {

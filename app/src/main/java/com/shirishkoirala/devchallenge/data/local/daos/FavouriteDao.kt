@@ -1,7 +1,6 @@
 package com.shirishkoirala.devchallenge.data.local.daos
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -17,8 +16,8 @@ interface FavouriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(favorites: List<FavouriteEntity>)
 
-    @Delete
-    suspend fun delete(favourite: FavouriteEntity)
+    @Query("DELETE FROM favourites WHERE movieId=:movieId")
+    suspend fun delete(movieId: Int)
 
     @Update
     suspend fun update(favourite: FavouriteEntity)

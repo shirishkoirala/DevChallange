@@ -38,4 +38,17 @@ class DetailScreenViewModel(private val repository: MovieRepository) : ViewModel
             }
         }
     }
+
+    fun setFavourite(movieId: Int, boolean: Boolean) {
+        loader.postValue(true)
+        viewModelScope.launch {
+            repository.setFavourite(movieId, boolean).collect { result ->
+                if (result.isSuccess) {
+                    isFavourite.value?.let {
+                        isFavourite.postValue(!it)
+                    }
+                }
+            }
+        }
+    }
 }

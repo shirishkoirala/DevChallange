@@ -73,9 +73,10 @@ class MoviesService @Inject constructor(
 
     suspend fun addFavourite(
         accountId: Int,
-        movieId: Int
+        movieId: Int,
+        favourite: Boolean
     ): Flow<Result<PostResponse>> {
-        val postRatingMovieDTO = PostFavouriteMovieDTO(mediaId = movieId)
+        val postRatingMovieDTO = PostFavouriteMovieDTO(mediaId = movieId, favorite = favourite)
         return flow {
             emit(Result.success(api.addFavourite(accountId, postRatingMovieDTO)))
         }.catch {
