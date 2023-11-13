@@ -1,5 +1,6 @@
 package com.shirishkoirala.devchallenge.data.network.mappers
 
+import com.shirishkoirala.devchallenge.data.local.entities.FavouriteEntity
 import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.models.Movie
 import kotlin.math.roundToInt
@@ -23,6 +24,14 @@ object FavouriteMoviesMapper {
                 year = releasedYear,
                 userScore = popularity,
                 posterPath = "https://image.tmdb.org/t/p/w500/${it.posterPath}"
+            )
+        }
+    }
+
+    fun mapFavouriteMoviesDtoToFavouriteEntity(favouriteMoviesDTO: FavouriteMoviesDTO): List<FavouriteEntity> {
+        return favouriteMoviesDTO.results.map {
+            FavouriteEntity(
+                movieId = it.id
             )
         }
     }

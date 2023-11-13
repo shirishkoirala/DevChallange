@@ -43,6 +43,8 @@ class MovieRepository @Inject constructor(
     suspend fun getFavouritesMovieList(accountId: Int): Flow<Result<List<Movie>>> =
         service.fetchFavouriteMovies(accountId).map {
             if (it.isSuccess) {
+                movieDatabase.getFavouriteDao()
+                    .insertAll(FavouriteMoviesMapper.mapFavouriteMoviesDtoToFavouriteEntity(it.getOrNull()!!))
                 Result.success(FavouriteMoviesMapper.map(it.getOrNull()!!))
             } else {
                 Result.failure(it.exceptionOrNull()!!)

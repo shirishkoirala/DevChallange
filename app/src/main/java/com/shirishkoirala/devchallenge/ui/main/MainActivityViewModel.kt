@@ -19,4 +19,13 @@ public class MainActivityViewModel @Inject constructor(private val repository: M
             }
         }
     }
+
+    fun getFavourites() {
+        loader.postValue(true)
+        viewModelScope.launch {
+            repository.getFavouritesMovieList(20678273).collect {
+                loader.postValue(false)
+            }
+        }
+    }
 }
