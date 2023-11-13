@@ -1,6 +1,7 @@
 package com.shirishkoirala.devchallenge.data.network.mappers
 
 import com.shirishkoirala.devchallenge.data.local.entities.GenreEntity
+import com.shirishkoirala.devchallenge.data.network.dtos.GenreDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
 import com.shirishkoirala.devchallenge.models.Genre
 
@@ -17,6 +18,15 @@ object GenreMapper {
 
     fun mapToGenre(getGenreListDto: GetGenreListDto): List<Genre> {
         return getGenreListDto.genres.map {
+            Genre(
+                id = it.id,
+                name = it.name
+            )
+        }
+    }
+
+    fun mapGenreDtoListToGenreList(genres: ArrayList<GenreDTO>): List<Genre> {
+        return genres.map {
             Genre(
                 id = it.id,
                 name = it.name

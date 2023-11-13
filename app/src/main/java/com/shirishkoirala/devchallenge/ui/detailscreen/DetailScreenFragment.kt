@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.shirishkoirala.devchallenge.R
+import com.shirishkoirala.devchallenge.adapters.GenreListAdapter
 import com.shirishkoirala.devchallenge.coordinators.Navigator
 import com.shirishkoirala.devchallenge.databinding.FragmentDetailScreenBinding
 import com.shirishkoirala.devchallenge.ui.ratingdialog.RatingDialogFragment
@@ -55,6 +56,8 @@ class DetailScreenFragment : Fragment() {
             movie.userScore?.toInt()?.let {
                 binding.rating.progress = it
             }
+            binding.date.text = movie.year
+            binding.genreList.adapter = movie.genres?.let { GenreListAdapter(it) }
         }
 
         binding.viewFavButton.setOnClickListener {

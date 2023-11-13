@@ -7,7 +7,7 @@ import com.shirishkoirala.devchallenge.models.Movie
 import kotlin.math.roundToInt
 
 object MovieMapper {
-    fun map(detailMovieDto: MovieDetailDTO): Movie {
+    suspend fun map(detailMovieDto: MovieDetailDTO): Movie {
 
         var releasedYear: String? = null
         var popularity: String? = null
@@ -28,6 +28,7 @@ object MovieMapper {
             posterPath = "https://image.tmdb.org/t/p/w500/${detailMovieDto.posterPath}",
             backdropPath = "https://image.tmdb.org/t/p/w500/${detailMovieDto.backdropPath}",
             overview = detailMovieDto.overview,
+            genres = GenreMapper.mapGenreDtoListToGenreList(detailMovieDto.genres),
         )
     }
 
