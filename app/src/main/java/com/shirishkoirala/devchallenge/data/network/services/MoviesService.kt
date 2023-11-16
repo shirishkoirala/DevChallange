@@ -1,7 +1,7 @@
 package com.shirishkoirala.devchallenge.data.network.services
 
 import android.util.Log
-import com.shirishkoirala.devchallenge.data.network.apis.ApiService
+import com.shirishkoirala.devchallenge.data.network.apis.TmdbApi
 import com.shirishkoirala.devchallenge.data.network.dtos.FavouriteMoviesDTO
 import com.shirishkoirala.devchallenge.data.network.dtos.GetGenreListDto
 import com.shirishkoirala.devchallenge.data.network.dtos.GetRatedMoviesResponse
@@ -16,11 +16,11 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MoviesService @Inject constructor(
-    private val api: ApiService
+    private val tmdbApi: TmdbApi
 ) {
     suspend fun fetchPopularMoviesService(): Flow<Result<PopularMoviesDTO>> {
         return flow {
-            emit(Result.success(api.getTrendingMoviesOfTheDay()))
+            emit(Result.success(tmdbApi.getTrendingMoviesOfTheDay()))
         }.catch {
             Log.e("PopularMoviesService", "fetchPopularMoviesService: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
@@ -28,24 +28,24 @@ class MoviesService @Inject constructor(
     }
 
     suspend fun fetchMovieDetail(movieId: Int): Flow<Result<MovieDetailDTO>> {
-        return flow<Result<MovieDetailDTO>> {
-            emit(Result.success(api.getMovieDetail(movieId)))
+        return flow {
+            emit(Result.success(tmdbApi.getMovieDetail(movieId)))
         }.catch {
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }
 
     suspend fun fetchFavouriteMovies(accountId: Int): Flow<Result<FavouriteMoviesDTO>> {
-        return flow<Result<FavouriteMoviesDTO>> {
-            emit(Result.success(api.getFavouritesMovies(accountId)))
+        return flow {
+            emit(Result.success(tmdbApi.getFavouritesMovies(accountId)))
         }.catch {
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
     }
 
     suspend fun searchMovies(query: String): Flow<Result<PopularMoviesDTO>> {
-        return flow<Result<PopularMoviesDTO>> {
-            emit(Result.success(api.search(query)))
+        return flow {
+            emit(Result.success(tmdbApi.search(query)))
         }.catch {
             Log.e("MoviesService", "searchMovies: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
@@ -53,8 +53,8 @@ class MoviesService @Inject constructor(
     }
 
     suspend fun getMovieGenre(): Flow<Result<GetGenreListDto>> {
-        return flow<Result<GetGenreListDto>> {
-            emit(Result.success(api.getAllGenre()))
+        return flow {
+            emit(Result.success(tmdbApi.getAllGenre()))
         }.catch {
             emit(Result.failure(RuntimeException("Something went wrong!")))
         }
@@ -65,7 +65,7 @@ class MoviesService @Inject constructor(
             value = rating
         )
         return flow {
-            emit(Result.success(api.addRating(movieId, postRatingMovieDTO)))
+            emit(Result.success(tmdbApi.addRating(movieId, postRatingMovieDTO)))
         }.catch {
             Log.e("MoviesService", "postRating: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
@@ -74,7 +74,7 @@ class MoviesService @Inject constructor(
 
     suspend fun getRatedMovies(accountId: Int): Flow<Result<GetRatedMoviesResponse>> {
         return flow {
-            emit(Result.success(api.getRating(accountId)))
+            emit(Result.success(tmdbApi.getRating(accountId)))
         }.catch {
             Log.e("MoviesService", "getRatedMovies: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))
@@ -88,7 +88,7 @@ class MoviesService @Inject constructor(
     ): Flow<Result<PostResponse>> {
         val postRatingMovieDTO = PostFavouriteMovieDTO(mediaId = movieId, favorite = favourite)
         return flow {
-            emit(Result.success(api.addFavourite(accountId, postRatingMovieDTO)))
+            emit(Result.success(tmdbApi.addFavourite(accountId, postRatingMovieDTO)))
         }.catch {
             Log.e("MoviesService", "postRating: ${it.message}")
             emit(Result.failure(RuntimeException("Something went wrong!")))

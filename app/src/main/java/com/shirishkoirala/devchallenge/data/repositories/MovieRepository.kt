@@ -95,6 +95,9 @@ class MovieRepository @Inject constructor(
     suspend fun getRatedMovies(accountId: Int): Flow<Result<List<Movie>>> =
         service.getRatedMovies(accountId).map {
             if (it.isSuccess) {
+                movieDatabase.getRatedMoviesDao().insertAll(
+                    RatedMoviesMapper.mapRatedMoviesResponseToRatedMoviesEntity(it.getOrNull()!!)
+                )
                 Result.success(
                     RatedMoviesMapper.mapRatedMoviesResponseToRatedMovies(
                         it.getOrNull()!!,

@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             ViewModelProvider(this, mainActivityViewModelFactory)[MainActivityViewModel::class.java]
         viewModel.getAllGenre()
         viewModel.getFavourites()
+        viewModel.getRatedMovies()
         setContentView(binding.root)
         navigator.activity = this
         navigator.showPopularMovies()

@@ -28,4 +28,13 @@ public class MainActivityViewModel @Inject constructor(private val repository: M
             }
         }
     }
+
+    fun getRatedMovies() {
+        loader.postValue(true)
+        viewModelScope.launch {
+            repository.getRatedMovies(20678273).collect {
+                loader.postValue(false)
+            }
+        }
+    }
 }

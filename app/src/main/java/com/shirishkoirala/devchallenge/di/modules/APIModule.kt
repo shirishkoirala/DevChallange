@@ -1,8 +1,8 @@
 package com.shirishkoirala.devchallenge.di.modules
 
 import android.content.Context
-import com.shirishkoirala.devchallenge.data.network.apis.ApiService
-import com.shirishkoirala.devchallenge.data.network.apis.AuthInterceptor
+import com.shirishkoirala.devchallenge.data.network.apis.TmdbApi
+import com.shirishkoirala.devchallenge.data.network.interceptors.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +31,7 @@ class APIModule {
 
     @Singleton
     @Provides
-    fun apiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+    fun apiService(retrofit: Retrofit): TmdbApi = retrofit.create(TmdbApi::class.java)
 
     @Singleton
     @Provides
