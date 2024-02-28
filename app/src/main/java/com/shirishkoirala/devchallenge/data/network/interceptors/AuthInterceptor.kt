@@ -1,6 +1,7 @@
 package com.shirishkoirala.devchallenge.data.network.interceptors
 
 import android.content.Context
+import com.shirishkoirala.devchallenge.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -12,7 +13,7 @@ class AuthInterceptor(context: Context) : Interceptor {
         // If token has been saved, add it to the request
         requestBuilder.addHeader(
             "Authorization",
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjgyYTdmMDk5MjQ1MzJkNWYxOGU4NTE1ZmVlYmFjZCIsInN1YiI6IjY1NGFkYmYyMjg2NmZhMDExYmQxMTc2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3Ow8pqD_WQEXYR0KCO1JQ_te4Ti3wMU3kCXgEOijvRY"
+            "Bearer ${BuildConfig.API_KEY}"
         )
 
         return chain.proceed(requestBuilder.build())

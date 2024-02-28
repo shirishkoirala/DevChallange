@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     kotlin("kapt")
@@ -10,6 +12,12 @@ android {
     namespace = "com.shirishkoirala.devchallenge"
     compileSdk = 34
 
+    val keystoreFile = project.rootProject.file("api.properties")
+    val properties = Properties()
+    properties.load(keystoreFile.inputStream())
+
+    val apiKey = properties.getProperty("barer.token")
+
     defaultConfig {
         applicationId = "com.shirishkoirala.devchallenge"
         minSdk = 24
@@ -18,14 +26,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            type = "String",
+            name = "API_KEY",
+            value = apiKey
+        )
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -38,6 +51,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     kapt {
         correctErrorTypes = true
